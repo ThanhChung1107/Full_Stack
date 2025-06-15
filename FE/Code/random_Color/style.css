@@ -1,0 +1,37 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#btn {
+    padding: 4px 8px ;
+    background-color: aqua;
+    border: none;
+}
+p {
+    animation: colorchange 5s infinite alternate;
+}
+
+@keyframes colorchange{
+    0%{
+        color: indigo;
+    }
+    20%{
+        color: blue;
+    }
+    40%{
+        color: green;
+    }
+    60%{
+        color: yellow;
+    }
+    80%{
+        color: orange;
+    }
+    100%{
+        color: red;
+    }
+}

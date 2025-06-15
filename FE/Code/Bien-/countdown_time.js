@@ -6,7 +6,7 @@ function countdown(miniutes) {
         let minutes = Math.floor(seconds / 60);
         let secs = seconds % 60;
         let prefix = secs < 10 ? "0" : "";
-        console.clear();
+        console.clear();    
         console.log(`${minutes}:${prefix}${secs}`);
         if(seconds <= 0) {
             clearInterval(countdownInterval);

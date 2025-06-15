@@ -1,0 +1,17 @@
+section {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+div {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    background-color: aquamarine;
+    margin: 5px;
+    border-radius: 6px;
+}
