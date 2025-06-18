@@ -1,0 +1,57 @@
+* {
+    box-sizing: border-box;
+}
+.quotes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(13, 120, 136);
+}
+.inner-quotes-container {
+    background-color: #fff;
+    width: 80%;
+    min-height: 400px;
+    padding: 0 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 8px solid rgb(241, 204, 135);
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.9);
+    margin-bottom: 60px;
+    text-align: center;
+}
+.inner-quotes-container p {
+  font-size: 1.5rem;
+  color: black;
+}
+
+.inner-quotes-container h3 {
+  font-size: 2rem;
+  color: black;
+  font-family: 'Dancing Script', cursive;
+}
+@media(max-width:1280px) {
+  .container {
+    width: 95%;
+  }
+}
+
+@media(max-width:900px) {
+  .inner-quotes-container {
+    width: 100%;
+  }
+}
+
+@media(max-width:480px) {
+  .inner-quotes-container p {
+    font-size: 1.2rem;
+  }
+
+  .inner-quotes-container h3 {
+    font-size: 1.5rem;
+  }
+}
