@@ -67,18 +67,18 @@ function App() {
             
 
             {/* sử dụng spread operator */}
-            <MainContent {...data[0]}/>  
-            <MainContent {...data[1]}/> 
-            <MainContent {...data[2]}/> 
-            <MainContent {...data[3]}/> 
+            {data.map((item,index) => (
+              <MainContent key={item.id || index} {...item} />
+            ))}
+
           </ul>
         </section>
         <section id="examples">
           <menu>
-            <TabButton onSelect={() => handleClick('components')}>Components</TabButton>
-            <TabButton onSelect={() => handleClick('JSX')}>JSX</TabButton>
-            <TabButton onSelect={() => handleClick('Props')}>Props</TabButton>
-            <TabButton onSelect={() => handleClick('States')}>States</TabButton>
+            <TabButton isSelected={selectedTopic === "components"} onSelect={() => handleClick('components')}>Components</TabButton>
+            <TabButton isSelected={selectedTopic === "JSX"} onSelect={() => handleClick('JSX')}>JSX</TabButton>
+            <TabButton isSelected={selectedTopic === "Props"} onSelect={() => handleClick('Props')}>Props</TabButton>
+            <TabButton isSelected={selectedTopic === "States"} onSelect={() => handleClick('States')}>States</TabButton>
             
           </menu>
           {topicContent[selectedTopic] ? (
