@@ -3,6 +3,8 @@ import logo from "./assets/logo-tuhoc.png";
 import {data, topicContent} from "../data.js"
 import TabButton from "./TabButton.jsx";
 import { useState } from "react";
+import Section from "./component/mainContent/Section.jsx";
+import Tabs from "./component/mainContent/Tabs.jsx";
 function Header() {
   return (
     <>
@@ -73,14 +75,19 @@ function App() {
 
           </ul>
         </section>
-        <section id="examples">
-          <menu>
-            <TabButton isSelected={selectedTopic === "components"} onSelect={() => handleClick('components')}>Components</TabButton>
-            <TabButton isSelected={selectedTopic === "JSX"} onSelect={() => handleClick('JSX')}>JSX</TabButton>
-            <TabButton isSelected={selectedTopic === "Props"} onSelect={() => handleClick('Props')}>Props</TabButton>
-            <TabButton isSelected={selectedTopic === "States"} onSelect={() => handleClick('States')}>States</TabButton>
+        <Section title="examples" id="examples" className = "props">
+          
+          <Tabs button = {
+              <>
+                <TabButton isSelected={selectedTopic === "components"} onSelect={() => handleClick('components')}>Components</TabButton>
+              <TabButton isSelected={selectedTopic === "JSX"} onSelect={() => handleClick('JSX')}>JSX</TabButton>
+              <TabButton isSelected={selectedTopic === "Props"} onSelect={() => handleClick('Props')}>Props</TabButton>
+              <TabButton isSelected={selectedTopic === "States"} onSelect={() => handleClick('States')}>States</TabButton>
+              </>
+            }>
             
-          </menu>
+            
+          </Tabs>
           {topicContent[selectedTopic] ? (
             <div id="tab-content">
               <h3>{topicContent[selectedTopic].title}</h3>
@@ -90,7 +97,7 @@ function App() {
             <p>{selectedTopic}</p> // ví dụ: "vui lòng click vào nút"
           )}
 
-        </section>
+        </Section>
       </main>
     </>
   );
