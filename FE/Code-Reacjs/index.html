@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gợi ý Trang Phục Theo Thời Tiết</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .weather-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: #f9f9f9;
+            text-align: left;
+        }
+        .clothing-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .clothing-icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        .hot { color: #FF5722; }
+        .cold { color: #2196F3; }
+        .rain { color: #607D8B; }
+        .snow { color: #00BCD4; }
+    </style>
+</head>
+<body>
+    <h1>GỢI Ý TRANG PHỤC THEO THỜI TIẾT</h1>
+    
+    <div class="weather-container">
+        <div class="input-group">
+            <label for="temperature">Nhiệt độ (°C):</label>
+            <input type="number" id="temperature" placeholder="Ví dụ: 25">
+        </div>
+        
+        <div class="input-group">
+            <label for="weather-condition">Điều kiện thời tiết:</label>
+            <select id="weather-condition">
+                <option value="sunny">Nắng</option>
+                <option value="rainy">Mưa</option>
+                <option value="cloudy">Nhiều mây</option>
+                <option value="snowy">Tuyết</option>
+                <option value="windy">Gió</option>
+            </select>
+        </div>
+        
+        <button onclick="suggestClothing()">Gợi ý Trang Phục</button>
+        
+        <div id="result" class="result" style="display: none;">
+            <h3>Bạn nên mặc:</h3>
+            <div id="clothing-suggestions"></div>
+        </div>
+    </div>
+
+    <script>
+        function suggestClothing() {
+            const temperature = parseFloat(document.getElementById("temperature").value);
+            const weatherCondition = document.getElementById("weather-condition").value;
+            
+            if (isNaN(temperature)) {
+                alert("Vui lòng nhập nhiệt độ hợp lệ!");
+                return;
+            }
+            
+            const suggestions = getClothingSuggestions(temperature, weatherCondition);
+            displaySuggestions(suggestions);
+        }
+        
+        function getClothingSuggestions(temp, condition) {
+            let suggestions = [];
+            
+            // Gợi ý dựa trên nhiệt độ
+            if (temp >= 30) {
+                suggestions.push({ icon: "☀️", item: "Áo phông ngắn tay", reason: "Trời nóng, nên mặc đồ thoáng mát" });
+                suggestions.push({ icon: "🩳", item: "Quần short", reason: "Giúp thoải mái trong thời tiết nắng nóng" });
+                suggestions.push({ icon: "🧢", item: "Mũ rộng vành", reason: "Bảo vệ khỏi tia UV" });
+                suggestions.push({ icon: "🕶️", item: "Kính râm", reason: "Chống chói nắng" });
+            } 
+            else if (temp >= 20) {
+                suggestions.push({ icon: "👕", item: "Áo thun dài tay", reason: "Thời tiết ấm áp, thoải mái" });
+                suggestions.push({ icon: "👖", item: "Quần dài mỏng", reason: "Phù hợp nhiệt độ ôn hòa" });
+            } 
+            else if (temp >= 10) {
+                suggestions.push({ icon: "🧥", item: "Áo khoác mỏng", reason: "Trời se lạnh, cần giữ ấm nhẹ" });
+                suggestions.push({ icon: "👖", item: "Quần jeans", reason: "Giữ nhiệt tốt" });
+            } 
+            else {
+                suggestions.push({ icon: "🧣", item: "Áo len dày", reason: "Trời lạnh, cần giữ ấm" });
+                suggestions.push({ icon: "🧤", item: "Găng tay", reason: "Tránh tê cóng tay" });
+                suggestions.push({ icon: "🎩", item: "Mũ len", reason: "Giữ ấm đầu" });
+            }
+            
+            // Gợi ý thêm dựa trên điều kiện thời tiết
+            if (condition === "rainy") {
+                suggestions.push({ icon: "☔", item: "Áo mưa / Dù", reason: "Trời mưa, cần tránh ướt" });
+                suggestions.push({ icon: "👢", item: "Ủng chống nước", reason: "Đi lại dễ dàng trong mưa" });
+            } 
+            else if (condition === "snowy") {
+                suggestions.push({ icon: "⛄", item: "Áo khoác chống tuyết", reason: "Giữ ấm trong thời tiết tuyết" });
+                suggestions.push({ icon: "🧦", item: "Tất dày", reason: "Giữ ấm chân" });
+            } 
+            else if (condition === "windy") {
+                suggestions.push({ icon: "🌬️", item: "Áo gió nhẹ", reason: "Chắn gió tốt" });
+            }
+            
+            return suggestions;
+        }
+        
+        function displaySuggestions(suggestions) {
+            const resultDiv = document.getElementById("result");
+            const suggestionsDiv = document.getElementById("clothing-suggestions");
+            
+            suggestionsDiv.innerHTML = "";
+            
+            suggestions.forEach(item => {
+                const itemElement = document.createElement("div");
+                itemElement.className = "clothing-item";
+                itemElement.innerHTML = `
+                    <span class="clothing-icon">${item.icon}</span>
+                    <div>
+                        <strong>${item.item}</strong>
+                        <p>${item.reason}</p>
+                    </div>
+                `;
+                suggestionsDiv.appendChild(itemElement);
+            });
+            
+            resultDiv.style.display = "block";
+        }
+    </script>
+</body>
+</html>
