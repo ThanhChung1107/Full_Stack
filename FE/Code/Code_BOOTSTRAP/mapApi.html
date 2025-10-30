@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bản đồ Google Maps API Demo</title>
+  <style>
+    /* Đặt kích thước cho bản đồ */
+    #map {
+      height: 500px;
+      width: 100%;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2 class="text-center">📍 Vị trí cửa hàng của tôi</h2>
+  <div id="map"></div>
+
+  <script>
+    // Hàm khởi tạo bản đồ
+    function initMap() {
+      // Tọa độ (ví dụ: TP. Hồ Chí Minh)
+      const location = { lat: 10.762622, lng: 106.660172 };
+
+      // Tạo bản đồ
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: location,
+      });
+
+      // Tạo marker
+      const marker = new google.maps.Marker({
+        position: location,
+        map: map,
+        title: "Cửa hàng giày Ronaldo Sneaker",
+      });
+
+      // Thêm cửa sổ thông tin
+      const infoWindow = new google.maps.InfoWindow({
+        content: "<h4>Ronaldo Sneaker</h4><p>123 Nguyễn Trãi, Q.5, TP.HCM</p>",
+      });
+
+      // Sự kiện click marker để mở info
+      marker.addListener("click", () => {
+        infoWindow.open(map, marker);
+      });
+    }
+  </script>
+
+  <!-- Link đến Google Maps API (thay YOUR_API_KEY bằng key thật của bạn) -->
+  <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDG_2jiPOM4wdn0Aw4bmzQhrowLr1BcofY&callback=initMap">
+  </script>
+</body>
+</html>
