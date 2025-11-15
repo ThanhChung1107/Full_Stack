@@ -1,19 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Welcome Screen</title>
-</head>
-<body>
+<%@ page import="java.util.List" %>
+<%@ page import="com.FirstProject.model.bean.Wire" %>
+
 <%
-    String username = request.getParameter("username");
-    String address = (String) request.getAttribute("address");
-    String temp = (String) session.getAttribute("temp");
+    List<Wire> users = (List<Wire>) request.getAttribute("users");
 %>
 
-Welcome= <%= username %>! <br>
-You are living at= <%= address %> <br>
-Temp = <%= temp %>
+<h2>Danh sách người dùng:</h2>
 
-</body>
-</html>
+<ul>
+<% for(Wire u : users) { %>
+    <li>
+    Username: <%= u.getUsername() %> 
+    - Address: <%= u.getAddress() %> 
+    - Alive: <%= u.isAlive() %>
+</li>
+<% } %>
+</ul>

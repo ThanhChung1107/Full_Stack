@@ -12,7 +12,7 @@
 		session.setAttribute("temp",temp);
 	%>
 	
-	<form name="form1" action="checkLogin.jsp" method="post">
+	<form name="form1" action="login" method="post">
 		Username: <input type="text" name="username"/>
 		Password: <input type="password" name="password"/>
 		<input type="submit" value="Login"/>
